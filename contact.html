@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Contact Me</title>
+    <style>
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #0f0f0f, #3b3b3b, #b1ada8);
+    height: 100vh;
+}
+
+.navbar{
+    width: 100%;
+    padding: 15px 30px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0,0,0,0.2);
+    backdrop-filter: blur(10px);
+}
+
+.navbar h1{
+    color: #fff;
+    font-size: 18px;
+}
+
+.navbar a{
+    text-decoration: none;
+    color: #fff;
+    background: linear-gradient(135deg,#4b4a4a, #b1ada8);
+    padding: 8px 15px;
+    border-radius: 20px;
+    transition: 0.3s;
+}
+
+.navbar a:hover{
+    transform: scale(1.1);
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.contact-box {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px);
+    padding: 30px;
+    border-radius: 20px;
+    width: 320px;
+    box-shadow: 
+        0 10px 30px rgba(49, 49, 49, 0.6),
+        0 20px 60px rgba(34, 34, 34, 0.6);
+    text-align: center;
+}
+
+.contact-box h2 {
+    margin-bottom: 20px;
+    color: #e5e7eb;
+    text-shadow: 0 0 10px #363636;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    background: rgba(255,255,255,0.08);
+    color: #fff;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+input:focus, textarea:focus {
+    background: rgba(255,255,255,0.15);
+    box-shadow: 0 0 10px #503206;
+}
+
+textarea {
+    resize: none;
+    height: 100px;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 25px;
+    background: linear-gradient(45deg, #252525, #302f2f);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.08);
+    box-shadow: 0 5px 25px rgba(10, 10, 10, 0.6);
+}
+
+    </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <h1>Contact</h1>
+    <a href="index.html">My Profile</a>
+</div>
+
+<!-- FORM -->
+<div class="container">
+    <div class="contact-box">
+        <h2>Contact Me</h2>
+
+        <input type="text" placeholder="Your Name">
+        <input type="email" placeholder="Your Email">
+        <textarea placeholder="Your Message"></textarea>
+
+        <button>Send Message</button>
+    </div>
+</div>
+
+</body>
+</html>
