@@ -16,7 +16,6 @@ body {
     color: white;
 }
 
-/* ANIMATION */
 @keyframes gradientMove {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
@@ -49,7 +48,7 @@ body {
     color: white;
 }
 
-/* HERO */
+/* HERO SECTION */
 .hero {
     min-height: 100vh;
     display: flex;
@@ -77,7 +76,8 @@ body {
     width: 350px;
     height: 350px;
     border-radius: 50%;
-    background: url('/assets/images/profil.jpg') center/cover;
+    /* Pastikan gambar ini ada di foldermu, atau ganti linknya */
+    background: url('../images/profil.jpg') center/cover no-repeat; 
     box-shadow: 0 20px 40px rgba(0,0,0,0.5);
     transition: 0.4s;
 }
@@ -86,7 +86,7 @@ body {
     transform: scale(1.05);
 }
 
-/* SOSMED */
+/* SOCIAL MEDIA */
 .sosmed {
     display: flex;
     gap: 15px;
@@ -109,12 +109,16 @@ body {
     background: #555;
 }
 
-/* PROJECT PAGE */
+/* FORM ADD PROJECT */
 .project-page {
     padding: 120px 80px;
 }
 
-/* FORM */
+.project-page h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
 #projectForm {
     max-width: 700px;
     margin: auto;
@@ -123,10 +127,6 @@ body {
     border-radius: 15px;
     backdrop-filter: blur(10px);
     margin-bottom: 50px;
-}
-.project-page h2 {
-    text-align: center;
-    margin-bottom: 20px;
 }
 
 #projectForm input,
@@ -137,6 +137,7 @@ body {
     border-radius: 8px;
     border: none;
     outline: none;
+    font-family: 'Poppins', sans-serif;
 }
 
 .date-group {
@@ -150,7 +151,6 @@ body {
     margin-bottom: 10px;
 }
 
-/* BUTTON */
 #projectForm button {
     width: 100%;
     padding: 12px;
@@ -159,6 +159,7 @@ body {
     background: white;
     color: black;
     cursor: pointer;
+    font-weight: bold;
     transition: 0.3s;
 }
 
@@ -166,71 +167,10 @@ body {
     background: #ddd;
 }
 
-/* PROJECT LIST */
+/* PROJECT CARDS */
 .project-list {
     margin-top: 40px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-}
-
-/* CARD */
-.project-card {
-    background: rgba(255,255,255,0.08);
-    border-radius: 15px;
-    padding: 15px;
-    backdrop-filter: blur(10px);
-    transition: 0.3s;
-}
-
-.project-card:hover {
-    transform: translateY(-5px);
-}
-
-.project-img {
-    width: 100%;
-    height: 160px;
-    object-fit: cover;
-    border-radius: 10px;
-    margin-bottom: 10px;
-}
-
-.project-card h3 {
-    margin-bottom: 5px;
-}
-
-.project-card p {
-    font-size: 14px;
-    color: #ccc;
-}
-
-/* ACTION BUTTON */
-.actions {
     display: flex;
-    gap: 10px;
-    margin-top: 10px;
-}
-
-.actions button {
-    flex: 1;
-    padding: 8px;
-    border-radius: 10px;
-    border: none;
-    cursor: pointer;
-}
-
-.actions button:first-child {
-    background: #ffffff;
-    color: rgb(26, 25, 25);
-}
-
-.actions button:last-child {
-    background: #2e2e2e;
-    color: white;
-}
-
-.project-list {
-   display: flex;
     gap: 20px;
     flex-wrap: wrap;
     justify-content: center;
@@ -251,17 +191,17 @@ body {
     transform: translateY(-5px);
 }
 
-/* ✅ Gambar di atas */
 .project-img {
     width: 100%;
     height: 160px;
     object-fit: cover;
 }
 
-/* ✅ Isi konten */
 .project-content {
     padding: 15px;
     flex-grow: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .project-content h3 {
@@ -272,41 +212,52 @@ body {
 .project-content p {
     font-size: 13px;
     color: #ccc;
+    margin-bottom: 5px;
 }
 
-/* ✅ Tombol di bawah */
-.project-actions {
+/* CARD BUTTONS */
+.actions {
     display: flex;
     justify-content: space-between;
-    padding: 15px;
     gap: 10px;
+    margin-top: auto; /* Mendorong tombol ke paling bawah card */
+    padding-top: 15px;
 }
 
-.project-actions button {
+.actions button {
     flex: 1;
     padding: 8px;
     border: none;
     border-radius: 8px;
     cursor: pointer;
     font-weight: bold;
+    transition: 0.3s;
 }
 
-/* tombol edit */
-.project-actions button:first-child {
+.actions button.edit-btn {
     background: #e0e0e0;
+    color: rgb(26, 25, 25);
 }
 
-/* tombol delete */
-.project-actions button:last-child {
+.actions button.delete-btn {
     background: #444;
     color: white;
 }
 
-/* RESPONSIVE */
+.actions button:hover {
+    opacity: 0.8;
+}
+
+/* RESPONSIVE DESIGN */
 @media (max-width: 768px) {
+    .navbar {
+        padding: 15px 20px;
+    }
+
     .hero {
         flex-direction: column;
         text-align: center;
+        padding: 100px 20px 40px;
     }
 
     .hero-img {
@@ -314,8 +265,16 @@ body {
         height: 250px;
     }
 
+    .project-page {
+        padding: 60px 20px;
+    }
+
     .checkbox-group {
         flex-direction: column;
         gap: 10px;
+    }
+    
+    .date-group {
+        flex-direction: column;
     }
 }

@@ -1,5 +1,6 @@
 let projects = JSON.parse(localStorage.getItem("projects")) || [];
 let editIndex = null;
+let filterKeyword = ""; 
 
 const form = document.getElementById("projectForm");
 const projectList = document.getElementById("projectList");
@@ -8,44 +9,55 @@ const submitBtn = document.getElementById("submitBtn");
 if (!form || !projectList) {
     console.log("Form or projectList not found");
 } else {
+    
     function saveToLocalStorage() {
         localStorage.setItem("projects", JSON.stringify(projects));
     }
 
     function renderProjects() {
-        projectList.innerHTML = "";
+        const filteredProjects = projects.filter(proj => 
+            proj.name.toLowerCase().includes(filterKeyword.toLowerCase()) ||
+            proj.tech.some(t => t.toLowerCase().includes(filterKeyword.toLowerCase()))
+        );
 
-        projects.forEach((proj, index) => {
-            const card = document.createElement("div");
-            card.classList.add("project-card");
+        const htmlString = filteredProjects.map((proj) => {
+            const originalIndex = projects.indexOf(proj);
 
-            card.innerHTML = `
-                <img src="${proj.image || 'assets/images/default.jpg'}" class="project-img"/>
-                <div class="project-content">
-                    <h3>${proj.name}</h3>
-                    <p><strong>Duration:</strong> ${proj.start} - ${proj.end}</p>
-                    <p>${proj.desc}</p>
-                    <p><small>Tech: ${proj.tech.join(", ")}</small></p>
-                    <div class="actions">
-                        <button onclick="editProject(${index})" class="edit-btn">Edit</button>
-                        <button onclick="deleteProject(${index})" class="delete-btn">Delete</button>
+            return `
+                <div class="project-card">
+                    <img src="${proj.image || 'assets/images/default.jpg'}" class="project-img" alt="${proj.name}"/>
+                    <div class="project-content">
+                        <h3>${proj.name}</h3>
+                        <p><strong>Duration:</strong> ${proj.start} to ${proj.end}</p>
+                        <p>${proj.desc}</p>
+                        <p><small><strong>Tech:</strong> ${proj.tech.join(", ")}</small></p>
+                        <div class="actions">
+                            <button onclick="editProject(${originalIndex})" class="edit-btn">Edit</button>
+                            <button onclick="deleteProject(${originalIndex})" class="delete-btn">Delete</button>
+                        </div>
                     </div>
                 </div>
             `;
-            projectList.appendChild(card);
-        });
+        }).join("");
+
+        projectList.innerHTML = htmlString;
+    }
+
+    window.filterData = function(keyword) {
+        filterKeyword = keyword;
+        renderProjects();
     }
 
     window.deleteProject = function(index) {
         if(confirm("Are you sure you want to delete this project?")) {
-            projects.splice(index, 1);
-            saveToLocalStorage();
-            renderProjects();
+            projects.splice(index, 1); 
+            saveToLocalStorage();      
+            renderProjects();          
         }
     }
 
     window.editProject = function(index) {  
-        const proj = projects[index];
+        const proj = projects[index]; 
 
         document.getElementById("projectName").value = proj.name;
         document.getElementById("startDate").value = proj.start;
@@ -56,13 +68,13 @@ if (!form || !projectList) {
             cb.checked = proj.tech.includes(cb.value);
         });
 
-        editIndex = index;
-        submitBtn.innerText = "Update Project";
-        window.scrollTo(0, form.offsetTop - 100);
+        editIndex = index; 
+        submitBtn.innerText = "Update Project"; 
+        window.scrollTo(0, form.offsetTop - 100); 
     }
 
     form.addEventListener("submit", function(e) {
-        e.preventDefault();
+        e.preventDefault(); 
 
         const name = document.getElementById("projectName").value;
         const start = document.getElementById("startDate").value;
@@ -80,8 +92,8 @@ if (!form || !projectList) {
 
             if (editIndex !== null) {
                 projects[editIndex] = newProject;
-                editIndex = null;
-                submitBtn.innerText = "Submit";
+                editIndex = null; 
+                submitBtn.innerText = "Submit"; 
             } else {
                 projects.push(newProject);
             }
@@ -92,11 +104,10 @@ if (!form || !projectList) {
         };
 
         if (imageInput.files[0]) {
-            const reader = new FileReader();
+            const reader = new FileReader(); 
             reader.onload = () => processData(reader.result);
             reader.readAsDataURL(imageInput.files[0]);
         } else {
-            // Keep old image if editing and no new file selected
             const oldImage = (editIndex !== null) ? projects[editIndex].image : "";
             processData(oldImage);
         }
